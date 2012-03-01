@@ -31,10 +31,10 @@ $.feach('Gallery').define({
 Create or retrieve a feature. If chained from a DOM element, returns an instance of the feature.
 
 <pre>
-	$.feach('Gallery').define({foo : 'bar'}).make('.gallery');
-	$.feach('Gallery');                                         // Gallery feature
-	$('.gallery').eq(0).feach();                                // Gallery instance
-	$('.gallery').eq(0).feach().foo;                            // 'bar'
+$.feach('Gallery').define({foo : 'bar'}).make('.gallery');
+$.feach('Gallery');                                         // Gallery feature
+$('.gallery').eq(0).feach();                                // Gallery instance
+$('.gallery').eq(0).feach().foo;                            // 'bar'
 </pre>
 
 
@@ -44,7 +44,7 @@ Create or retrieve a feature. If chained from a DOM element, returns an instance
 Define a feature, using the properties of <code>obj</code>
 
 <pre>
-	$.feach('Gallery').define({ foo : 'bar' });  // Gallery feature
+$.feach('Gallery').define({ foo : 'bar' });  // Gallery feature
 </pre>
 
 <h4 id="feach_make">.make('selector', $context, {config})</h4>
@@ -52,8 +52,8 @@ Define a feature, using the properties of <code>obj</code>
 Create one instance of a feature for each DOM element in a set. All parameters are optional. Setting a {config} will add properties to the inst.options object.
 
 <pre>
-	$.feach('Gallery').make('.gallery', $('#content'), {foo : 'bar'})
-	$('.gallery').eq(0).feach().options.foo;                          // 'bar'
+$.feach('Gallery').make('.gallery', $('#content'), {foo : 'bar'})
+$('.gallery').eq(0).feach().options.foo;                          // 'bar'
 </pre>
 
 <h4 id="feach_aug">.aug({obj})</h4>
@@ -61,10 +61,10 @@ Create one instance of a feature for each DOM element in a set. All parameters a
 Add or overwrite properties of an existing feature. 
 
 <pre>
-	$.feach('Gallery').define({foo : 'bar'});
-	$.feach('Gallery').aug({foo : 'not bar', paused : true});
-	$.feach('Gallery').def.prototype.foo               // 'not bar'
-	$.feach('Gallery').def.prototype.paused            // true
+$.feach('Gallery').define({foo : 'bar'});
+$.feach('Gallery').aug({foo : 'not bar', paused : true});
+$.feach('Gallery').def.prototype.foo               // 'not bar'
+$.feach('Gallery').def.prototype.paused            // true
 </pre>
 
 <h4 id="feach_extend">.extend('Name')</h4>
@@ -72,11 +72,11 @@ Add or overwrite properties of an existing feature.
 Inherits properties from an existing ('parent') feature. An matching properties will be ignored. Matching _methods_ will be saved in a _super() method.
 
 <pre>
-	$.feach('Gallery').define({foo : 'bar', add_one : function(){ return 1; }});
-	$.feach('ThumbGallery').define(({ add_one : function(){ return 1 + this._super() }}).extend('Gallery');
-	$.feach('ThumbGallery').make('.gallery');
-	$('.gallery').eq(0).feach().foo          // 'bar'
-	$('.gallery').eq(0).feach().add_one()    // 2
+$.feach('Gallery').define({foo : 'bar', add_one : function(){ return 1; }});
+$.feach('ThumbGallery').define(({ add_one : function(){ return 1 + this._super() }}).extend('Gallery');
+$.feach('ThumbGallery').make('.gallery');
+$('.gallery').eq(0).feach().foo          // 'bar'
+$('.gallery').eq(0).feach().add_one()    // 2
 </pre>
 
 <h4 id="feach_get">.get()</h4>
@@ -84,8 +84,8 @@ Inherits properties from an existing ('parent') feature. An matching properties 
 Returns a jQuery object of DOM elements a feature has instantiated from.
 
 <pre>
-	$.feach('Gallery').make('.gallery');
-	$.feach('Gallery').get(); // [<div class="gallery"></div><div class="gallery">]
+$.feach('Gallery').make('.gallery');
+$.feach('Gallery').get(); // [<div class="gallery"></div><div class="gallery">]
 </pre>
 
 <h4 id="feach_each">.each(method|'method_name', arg1, arg2, arg3...)</h3>
@@ -93,10 +93,10 @@ Returns a jQuery object of DOM elements a feature has instantiated from.
 Calls a method on all instances of a feature.
 
 <pre>
-	$.feach('Gallery').each('pause', 400);
-	$.feach('Gallery').each(function(){
-		this.pause(400);
-	});
+$.feach('Gallery').each('pause', 400);
+$.feach('Gallery').each(function(){
+	this.pause(400);
+});
 </pre>
 
 <h4 id="feach_instances">.destroy(destroy_instances, destroy_elems)</h4>
@@ -108,8 +108,8 @@ Deletes a feature. Optionally deletes all instances of the feature and removes a
 Array of all instances of a feature.
 
 <pre>
-	$.feach('Gallery').instances[0]; // [array]
-	$.feach('Gallery').instances[0].pause();
+$.feach('Gallery').instances[0]; // [array]
+$.feach('Gallery').instances[0].pause();
 </pre>
 
 
@@ -128,8 +128,8 @@ Init, when set, will be called when .make() is used.
 If you set a feature's name in the definition, you don't need to name it in $.feach(). Example:
 
 <pre>
-	$.feach().define({name : 'Gallery'});
-	$.feach('Gallery'); // returns existing feature named 'Gallery'
+$.feach().define({name : 'Gallery'});
+$.feach('Gallery'); // returns existing feature named 'Gallery'
 </pre>
 
 <h4 id="special_selector">.selector</h4>
@@ -137,7 +137,7 @@ If you set a feature's name in the definition, you don't need to name it in $.fe
 If you set a feature's selector in the definition, you don't need to set it when calling make(). Example:
 
 <pre>
-	$.feach('Gallery').define({selector : '.gallery'}).make();
+$.feach('Gallery').define({selector : '.gallery'}).make();
 </pre>
 
 <h4 id="special_dynamic">.dynamic</h4>
@@ -191,21 +191,21 @@ At any time (even after instances are created), you can modify these base proper
 Stores each prop in an object of selectors as $propname : $('selector', this.$elem). Example:
 
 <pre>
-	this._cacheDom({
-		'next' : '.gallery-next',
-		'thumb' : '.gallery-thumbs img'
-	});
-	this.$next;  // [<a href="#">Next</a>]
-	this.$thumb; // [<img /><img /><img />]
+this._cacheDom({
+	'next' : '.gallery-next',
+	'thumb' : '.gallery-thumbs img'
+});
+this.$next;  // [<a href="#">Next</a>]
+this.$thumb; // [<img /><img /><img />]
 </pre>
 
 Optionally takes a prefix:
 
 <pre>
-	this._cacheDom({
-		'next' : 'next',
-		'thumb' : 'thumbs img'
-	}, '.gallery-');
+this._cacheDom({
+	'next' : 'next',
+	'thumb' : 'thumbs img'
+}, '.gallery-');
 </pre>
 
 <h4 id="base_destroy">._destroy(remove_elem)</h4>
