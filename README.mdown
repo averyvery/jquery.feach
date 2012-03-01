@@ -115,7 +115,7 @@ Returns a jQuery object of DOM elements a feature has instantiated from.
 
 <pre>
 $.feach('Gallery').make('.gallery');
-$.feach('Gallery').get(); // [<div class="gallery"></div><div class="gallery">]
+$.feach('Gallery').get(); // gallery elements
 </pre>
 
 <a name="feach_each"></a>
