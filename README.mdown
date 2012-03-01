@@ -34,7 +34,7 @@ $.feach('Gallery').define({
 	- <a href="#feach_extend">.extend()</a>
 	- <a href="#feach_get">.get()</a>
 	- <a href="#feach_each">.each()</a>
-	- <a href="#feach_destroy">.destroy</a>
+	- <a href="#feach_destroy">.destroy()</a>
 	- <a href="#feach_instances">.instances</a>
 - <a href="#special">Special definition properties</a>
 	- <a href="#special_init">.init()</a>
@@ -52,7 +52,7 @@ $.feach('Gallery').define({
 - <a href="#base">Base methods</a>
 	- <a href="#special_props_init">.init()</a>
 
-<a name="feach">name</a>
+<a name="feach"></a>
 ### $.feach()
 
 Create or retrieve a feature. If chained from a DOM element, returns an instance of the feature.
@@ -119,7 +119,7 @@ $.feach('Gallery').get(); // [<div class="gallery"></div><div class="gallery">]
 </pre>
 
 <a name="feach_each"></a>
-#### .each(method|'method_name', arg1, arg2, arg3...)
+#### .each(method_or_method_name, arg1, arg2, arg3...)
 
 Apply a method on all instances of a feature.
 
