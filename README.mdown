@@ -52,7 +52,7 @@ $.feach('Gallery').define({
 - <a href="#base">Base methods</a>
 	- <a href="#special_props_init">.init()</a>
 
-<a name="feach"></a>
+<a name="feach">name</a>
 ### $.feach()
 
 Create or retrieve a feature. If chained from a DOM element, returns an instance of the feature.
