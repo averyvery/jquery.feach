@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<title>Feach</title>
+		<link rel="stylesheet" href="assets/bootstrap-1.2.0.css" />
+		<style type="text/css">
+			body {
+				background: #eee;
+			}
+			.container {
+				max-width: 940px;
+				min-width: 320px;
+				width: auto;
+			}
+			section {
+				padding: 20px 0;
+				overflow: visible;
+				width: auto;
+			}
+			section:first-child {
+				padding-top: 60px;
+			}
+			section:last-child {
+				padding-bottom: 60px;
+			}
+			img {
+				margin: 10px;
+			}
+			.btn + pre {
+				margin: 10px 0 30px;
+			}
+			h3 {
+				line-height: 22px;
+			}
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.feach.js"></script>
+	</head>
+	<body>
+
+		<div class="container">
+
+			<section>
+			
+				<div class="pageheader">
+					<h1>Feach 0.1</h1>
+				</div>
+
+				<p>A few basic examples. More to come.</p>
+
+			</section>
+
+			<section>
+				<div class="page-header">
+					<h2>Simple Stuff</h2>
+				</div>
+
+				<h3>Define a feature</h3>
+				<p class="make-me-red"><strong>Make Me Red</strong></p>
+				<pre>
+$.feach('MakeMeRed').define({
+	init : function(){
+		this.style();
+	},
+	style : function(){
+		this.$elem.css('border', '1px solid red')
+	}
+}).make('.make-me-red');</pre>
+
+				<hr />
+
+				<h3>Get DOM elements from a feature, and vice versa</h3>
+				<p class="expand">
+					<strong>Expand</strong>
+					<span>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+					</span>
+				</p>
+				<p class="expand">
+					<strong>Expand</strong>
+					<span>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+					</span>
+				</p>
+
+				<pre>
+$.feach('Expander').define({
+	init : function(){
+		this.$text = this.$elem.find('span').hide();
+		this.$elem.click($.proxy(this, this.show));
+	},
+	show : function(){
+		this.$elem.slideDown();
+	}
+}).make('.expand');
+
+console.log($.feach('Expander').get()); // feature
+console.log($('expand').eq(0).feach()); // elements
+</pre>
+
+				<hr />
+
+				<h3>Execute a named method on every instance</h3>
+				<p class="changetext">
+					Before Text
+				</p>
+				<p class="changetext">
+					Before Text
+				</p>
+
+				<pre>
+$.feach('ChangeText').define({
+	change : function(text){
+		this.$elem.text(text);
+	}
+}).make('.changetext');
+
+$.feach('ChangeText').each('change', 'After Text');
+</pre>
+
+				<hr />
+
+				<h3>Execute a passed function in instance context</h3>
+				<p class="setdifference">
+					Execute to calculate difference
+				</p>
+
+				<pre>
+$.feach('SetDifference').define({
+	max : 10,
+	min : 1
+}).make('.setdifference');
+
+$.feach('SetDifference').each(function(){ 
+	this.$elem.text(this.max - this.min);
+});
+</pre>
+
+				</section>
+
+		</div>
+
+
+		<script type="text/javascript">
+
+			$('pre').each(function(){
+				var pre = this;
+				$(this).before('<button class="btn">Execute</button>').prev().click(function(){
+					eval(pre.innerHTML);
+				});
+			});
+
+		</script>
+
+	</body>
+</html>
