@@ -59,9 +59,9 @@ Create or retrieve a feature. If chained from a DOM element, returns an instance
 
 <pre>
 $.feach('Gallery').define({foo : 'bar'}).make('.gallery');
-$.feach('Gallery');                                         // Gallery feature
-$('.gallery').eq(0).feach();                                // Gallery instance
-$('.gallery').eq(0).feach().foo;                            // 'bar'
+$.feach('Gallery');                // Gallery feature
+$('.gallery').eq(0).feach();       // Gallery instance
+$('.gallery').eq(0).feach().foo;   // 'bar'
 </pre>
 
 <a name="feach_define"></a>
@@ -80,7 +80,7 @@ Create one instance of a feature for each DOM element in a set. All parameters a
 
 <pre>
 $.feach('Gallery').make('.gallery', $('#content'), {foo : 'bar'})
-$('.gallery').eq(0).feach().options.foo;                          // 'bar'
+$('.gallery').eq(0).feach().options.foo;     // 'bar'
 </pre>
 
 <a name="feach_aug"></a>
