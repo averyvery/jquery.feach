@@ -4,7 +4,7 @@ A plugin/pattern for feature development in jQuery, inspired by my day-to-day JS
 
 Terminology: "features" are class-like elements - they define child objects ('instances') which are spawned ('made') for each DOM element in a set.
 
-Goals of the pattern:
+Goals:
 
 - Design for the most common use case
 - Use familiar, jQuery-style chaining
@@ -25,40 +25,6 @@ $.feach('Gallery').define({
 
 
 ## Documentation
-
-- <a href="#feach">$.feach()</a>
-<!---
-	- <a href="#feach_define">.define()</a>
-	- <a href="#feach_make">.make()</a>
-	- <a href="#feach_aug">.aug()</a>
-	- <a href="#feach_extend">.extend()</a>
-	- <a href="#feach_get">.get()</a>
-	- <a href="#feach_each">.each()</a>
-	- <a href="#feach_destroy">.destroy</a>
-	- <a href="#feach_instances">.instances</a>
---->
-- <a href="#special">Special definition properties</a>
-<!---
-	- <a href="#special_init">.init()</a>
-	- <a href="#special_name">.name</a>
-	- <a href="#special_selector">.selector</a>
-	- <a href="#special_dynamic">.dynamic</a>
-	- <a href="#special_defaults">.defaults</a>
-	- <a href="#special_teardown">.tearDown()</a>
---->
-- <a href="#instance_props">Instance properties</a>
-<!---
-	- <a href="#special_elem">.$elem</a>
-	- <a href="#special_index">.index</a>
-	- <a href="#special_super">._super()</a>
-	- <a href="#special_options">.options</a>
-	- <a href="#special_feature">.feature</a>
---->
-- <a href="#base">Base methods</a>
-	- <a href="#special_props_init">.init()</a>
-<!---
---->
-
 
 <h3 id="feach">$.feach('name')</h3>
 
