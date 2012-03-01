@@ -13,7 +13,7 @@ Goals:
 - Smooth over some of JS's OO quirks
 - Be opinionated
 
-## Basics
+# Basic Example
 
 <pre>// define a feature
 $.feach('Gallery').define({
@@ -24,7 +24,7 @@ $.feach('Gallery').define({
 </pre>
 
 
-## Documentation
+# Documentation
 
 
 - <a href="#feach">$.feach()</a>
@@ -53,7 +53,7 @@ $.feach('Gallery').define({
 	- <a href="#special_props_init">.init()</a>
 
 <a name="feach"></a>
-### $.feach()
+## $.feach()
 
 Create or retrieve a feature. If chained from a DOM element, returns an instance of the feature.
 
@@ -65,7 +65,7 @@ $('.gallery').eq(0).feach().foo;                            // 'bar'
 </pre>
 
 <a name="feach_define"></a>
-#### .define({obj})
+### .define({obj})
 
 Define a feature, using the properties of <code>obj</code>
 
@@ -74,7 +74,7 @@ $.feach('Gallery').define({ foo : 'bar' });  // Gallery feature
 </pre>
 
 <a name="feach_make"></a>
-#### .make('selector', $context, {config})
+### .make('selector', $context, {config})
 
 Create one instance of a feature for each DOM element in a set. All parameters are optional. Setting a {config} will add properties to the inst.options object.
 
@@ -96,7 +96,7 @@ $.feach('Gallery').def.prototype.paused            // true
 </pre>
 
 <a name="feach_extend"></a>
-#### .extend('Name')
+### .extend('Name')
 
 Inherits properties from an existing ('parent') feature. An matching properties will be ignored. Matching _methods_ will be saved in a _super() method.
 
@@ -109,7 +109,7 @@ $('.gallery').eq(0).feach().add_one()    // 2
 </pre>
 
 <a name="feach_get"></a>
-#### .get()
+### .get()
 
 Returns a jQuery object of DOM elements a feature has instantiated from.
 
@@ -119,7 +119,7 @@ $.feach('Gallery').get(); // gallery elements
 </pre>
 
 <a name="feach_each"></a>
-#### .each(method_or_method_name, arg1, arg2, arg3...)
+### .each(method_or_method_name, arg1, arg2, arg3...)
 
 Apply a method on all instances of a feature.
 
@@ -131,12 +131,12 @@ $.feach('Gallery').each(function(){
 </pre>
 
 <a name="feach_destroy"></a>
-#### .destroy(destroy_instances, destroy_elems)
+### .destroy(destroy_instances, destroy_elems)
 
 Deletes a feature. Optionally deletes all instances of the feature and removes all elements the feature was made() on.
 
 <a name="feach_instances"></a>
-#### .instances
+### .instances
 
 Array of all instances of a feature.
 
@@ -145,18 +145,20 @@ $.feach('Gallery').instances[0]; // [array]
 $.feach('Gallery').instances[0].pause();
 </pre>
 
+<hr />
+
 <a name="special"></a>
-### Special Properties
+## Special Properties
 
 All feature definition properties are optional. Setting the following properties in your definition will produce specific results: 
 
 <a name="special_init"></a>
-#### .init()
+### .init()
 
 Init, when set, will be called when .make() is used.
 
 <a name="special_name"></a>
-#### .name
+### .name
 
 If you set a feature's name in the definition, you don't need to name it in $.feach(). Example:
 
@@ -166,7 +168,7 @@ $.feach('Gallery'); // returns existing feature named 'Gallery'
 </pre>
 
 <a name="special_selector"></a>
-#### .selector
+### .selector
 
 If you set a feature's selector in the definition, you don't need to set it when calling make(). Example:
 
@@ -175,62 +177,64 @@ $.feach('Gallery').define({selector : '.gallery'}).make();
 </pre>
 
 <a name="special_dynamic"></a>
-#### .dynamic
+### .dynamic
 
 If your definition has a "dynamic" object, any property in it will be added after instantiation. This is useful for creating non-prototype properties that can be augmented per-instance.
 
 <a name="special_defaults"></a>
-#### .defaults
+### .defaults
 
 Every feature ends up with an "options" object, which is merged from .defaults and the {config} you pass in make().
 
 <a name="special_teardown"></a>
-#### .tearDown()
+### .tearDown()
 
 If you provide a tearDown method, it will be called when an instance or a class is destroy()ed. Useful for unbinding any events you might have in the feature.
 
 
+<hr />
+
 <a name="instance"></a>
-### Instance properties
+## Instance properties
 
 Each instance will always have the following properties:
 
 <a name="instance_elem"></a>
-#### .$elem
+### .$elem
 
 The original element a feature was instantiated from.
 
 <a name="instance_index"></a>
-#### .index
+### .index
 
 The index of $elem in its original selection. Be careful: this is dynamic or not necessarily unique. 
 
 <a name="instance_super"></a>
-#### ._super()
+### ._super()
 
 Call the parent feature's version of a method. This assumes that the current feature has been $.extended
 
 <a name="instance_options"></a>
-#### .options
+### .options
 
 A merged object of .defaults (set in in define()), .config (set in the make()), and data-attributes from the element itself.
 
 <a name="instance_feature"></a>
-#### .feature
+### .feature
 
 Reference to the original feature.
 
-
+<hr />
 
 <a name="base"></a>
-### Base class
+## Base class
 
 Every feature extends a Base object, which has some useful defaults. Methods that exist in the Base object will be overwritten _without_ a _super method, so be careful.
 
 At any time (even after instances are created), you can modify these base properties by altering $.feach.Base.prototype.
 
 <a name="base_cachedom"></a>
-#### ._cacheDom({obj}, prefix)
+### ._cacheDom({obj}, prefix)
 
 Stores each prop in an object of selectors as $propname : $('selector', this.$elem). Example:
 
@@ -253,11 +257,11 @@ this._cacheDom({
 </pre>
 
 <a name="base_destroy"></a>
-#### ._destroy(remove_elem)
+### ._destroy(remove_elem)
 
 Deletes an instance, calling .tearDown() if available. Optionally, removes the DOM element. 
 
 <a name="base_instindex"></a>
-#### ._instIndex()
+### ._instIndex()
 
 Returns the index of an instance in the feature.instances array. Used primarily for destroying instances.
