@@ -2,7 +2,7 @@
 
 A plugin/pattern for feature development in jQuery, inspired by my day-to-day JS workflow. 
 
-Terminology: "features" are class-like elements - they define child objects ('instances') which are spawned ('made') for each DOM element in a set.
+Terminology: 'features' are class-like elements - they define child objects ('instances') which are instantiated and tied ('made') to DOM elements.
 
 Goals:
 
