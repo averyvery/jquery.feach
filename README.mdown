@@ -26,7 +26,6 @@ $.feach('Gallery').define({
 
 # Documentation
 
-
 - <a href="#feach">$.feach()</a>
 	- <a href="#feach_define">.define()</a>
 	- <a href="#feach_make">.make()</a>
@@ -50,7 +49,9 @@ $.feach('Gallery').define({
 	- <a href="#special_options">.options</a>
 	- <a href="#special_feature">.feature</a>
 - <a href="#base">Base methods</a>
-	- <a href="#special_props_init">.init()</a>
+	- <a href="#base_cachedom">._cacheDom()</a>
+	- <a href="#base_destroy">._destroy()</a>
+	- <a href="#base_instindex">._instIndex()</a>
 
 <a name="feach"></a>
 ## $.feach()
