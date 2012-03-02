@@ -308,7 +308,6 @@ $.feach().define({
 		});
 	}
 
-
 	bindEvents : function(){
 		// gotta proxy your handlers somehow to keep scope
 		this.$close.on('feature.click', $.proxy(this.close, this));
