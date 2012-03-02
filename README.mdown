@@ -269,7 +269,7 @@ Deletes an instance, calling .tearDown() if available. Optionally, removes the D
 Returns the index of an instance in the feature.instances array. Used primarily for destroying instances.
 
 <a name="example"></a>
-### One example to rule them all
+## One example to rule them all
 
 <pre>
 
