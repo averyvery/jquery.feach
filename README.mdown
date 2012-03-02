@@ -244,8 +244,8 @@ this._cacheDom({
 	'next' : '.gallery-next',
 	'thumb' : '.gallery-thumbs img'
 });
-this.$next;  // [<a href="#">Next</a>]
-this.$thumb; // [<img /><img /><img />]
+this.$next;  // [A element]
+this.$thumb; // [IMG IMG IMG elements]
 </pre>
 
 Optionally takes a prefix:
