@@ -52,6 +52,7 @@ $.feach('Gallery').define({
 	- <a href="#base_cachedom">._cacheDom()</a>
 	- <a href="#base_destroy">._destroy()</a>
 	- <a href="#base_instindex">._instIndex()</a>
+- <a href="#example">Show me a crazy example!</a>
 
 <a name="feach"></a>
 ## $.feach()
@@ -164,8 +165,8 @@ Init, when set, will be called when .make() is used.
 If you set a feature's name in the definition, you don't need to name it in $.feach(). Example:
 
 <pre>
-$.feach().define({name : 'Gallery'});
-$.feach('Gallery'); // returns existing feature named 'Gallery'
+$.feach().define({name : 'Gallery'});  // creates 'Gallery' feature
+$.feach('Gallery');                    // returns 'Gallery' feature
 </pre>
 
 <a name="special_selector"></a>
@@ -266,3 +267,146 @@ Deletes an instance, calling .tearDown() if available. Optionally, removes the D
 ### ._instIndex()
 
 Returns the index of an instance in the feature.instances array. Used primarily for destroying instances.
+
+<a name="example"></a>
+### One example to rule them all
+
+<pre>
+
+// A mediocre gallery
+$.feach().define({
+
+	name : 'Gallery'
+	selector : '.gallery'
+
+	dynamic : {
+		// we want current_index to be an instance property, not a prototype property, so it goes into "dynamic"
+		current_index : 0
+	}
+
+	defaults : {
+		// these defaults become 'options', after being merged with make(config) and $elem data-attrs.
+		interval : 5000
+	},
+
+	init : function(){ 
+		this.getDom();
+		this.bindEvents();
+		this.start();
+	},
+
+	getDom : function(){
+		this.$images = this.$elem.find('img');
+		// _cacheDom will set find these selectors and save them as this.$vars
+		this._cacheDom({
+			prev : '.prev',
+			next : '.next',
+			pause : '.pause',
+		});
+	}
+
+
+	bindEvents : function(){
+		// gotta proxy your handlers somehow to keep scope
+		this.$close.on('feature.click', $.proxy(this.close, this));
+		this.$prev.on('feature.click', $.proxy(this.prev, this));
+		this.$next.on('feature.click', $.proxy(this.next, this));
+		this.$pause.on('feature.click', $.proxy(this.pause, this));
+	},
+
+	prev : function()[
+		var $current = this.$images.eq(this.current_index),
+			$prev = $current.prev().length ? $current.next().length : $images.last(); 
+		this.transition($prev, $current);
+	},
+
+	next : function(event)[
+		var $current = this.$images.eq(this.current_index),
+			$next = $current.next().length ? $current.next().length : $images.first(); 
+		this.transition($next, $current);
+		event || start();
+	},
+
+	start : function(){
+		this.timer = setTimeout($.proxy(this.next, this), this.options.defaults);
+	},
+
+	transition : function($in, $out){
+		this.current_index = $in.index();
+		$out.fadeOut();
+		$in.fadeIn();
+	},
+
+	pause : function(){
+		clearTimeout(this.timer);
+	},
+
+	close : function(){
+		var self = this;
+		self.$elem.fadeOut(200, function(){
+			// destroying removes the instance from the 'Gallery' instance array, and triggers tearDown.
+			self._destroy();
+		});
+	}
+
+	tearDown : function(){
+		this.$close
+			.add(this.$prev)
+			.add(this.$next)
+			.add(this.$pause)
+			.off('feature.click');
+	}
+
+});
+
+// oops! we need to augment the original feature definition on this page.
+$.feach('Gallery').aug({
+
+	getDom : function(){
+		this.$images = this.$elem.find('img');
+		this._cacheDom({
+			prev : 'prev',
+			next : 'next',
+			pause : 'pause',
+		// oops! we need to augment the original feature definition on this page.
+		// adding a prefix cuts down on repetiton in _cacheDom
+		}, '.gallerycontrols-');
+	}
+
+});
+
+$.feach().define({
+
+	name : 'MiniGallery',
+	selector : '.minigallery',
+
+	defaults : {
+		interval : 10000
+	},
+
+	init : function(){
+		this.$elem.fadeIn();
+		// since Gallery is going to extend Gallery, this _super call will execute the Gallery init() method
+		this._super();
+	},
+
+	transition : function($in, $out){
+		$out.slideUp();
+		$in.sldeDown();
+	},
+
+}).extend('Gallery');
+
+// let's just make everything, but only on DOM elements we find inside .container
+$.feach().makeAll($('.container'));
+
+// we need to act all these DOM elements
+$.feach('Gallery').get().css('border', '5px solid #eee');
+
+// we need to act all these instances
+$.feach('Gallery').each('pause');
+
+// how can we act on a gallery if all we know is its DOM element? simple.
+$('.gallery').eq(0).feach().start();
+
+</pre>
