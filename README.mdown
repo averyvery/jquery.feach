@@ -280,12 +280,14 @@ $.feach().define({
 	selector : '.gallery'
 
 	dynamic : {
-		// we want current_index to be an instance property, not a prototype property, so it goes into "dynamic"
+		// we want current_index to be an instance property, 
+		// not a prototype property, so it goes into "dynamic"
 		current_index : 0
 	}
 
 	defaults : {
-		// these defaults become 'options', after being merged with make(config) and $elem data-attrs.
+		// these defaults become 'options', after being merged 
+		// with make(config) and $elem data-attrs.
 		interval : 5000
 	},
 
@@ -297,7 +299,8 @@ $.feach().define({
 
 	getDom : function(){
 		this.$images = this.$elem.find('img');
-		// _cacheDom will set find these selectors and save them as this.$vars
+		// _cacheDom will set find these selectors and
+		// save them as this.$vars
 		this._cacheDom({
 			prev : '.prev',
 			next : '.next',
@@ -344,7 +347,8 @@ $.feach().define({
 	close : function(){
 		var self = this;
 		self.$elem.fadeOut(200, function(){
-			// destroying removes the instance from the 'Gallery' instance array, and triggers tearDown.
+			// destroying removes the instance from the 'Gallery' 
+			// instance array, and triggers tearDown.
 			self._destroy();
 		});
 	}
@@ -359,7 +363,8 @@ $.feach().define({
 
 });
 
-// oops! we need to augment the original feature definition on this page.
+// oops! we need to augment the original feature 
+// definition on this page.
 $.feach('Gallery').aug({
 
 	getDom : function(){
@@ -368,7 +373,6 @@ $.feach('Gallery').aug({
 			prev : 'prev',
 			next : 'next',
 			pause : 'pause',
-		// oops! we need to augment the original feature definition on this page.
 		// adding a prefix cuts down on repetiton in _cacheDom
 		}, '.gallerycontrols-');
 	}
@@ -386,7 +390,8 @@ $.feach().define({
 
 	init : function(){
 		this.$elem.fadeIn();
-		// since Gallery is going to extend Gallery, this _super call will execute the Gallery init() method
+		// since Gallery is going to extend Gallery, this _super() call 
+		// will execute the Gallery init() method
 		this._super();
 	},
 
@@ -397,7 +402,8 @@ $.feach().define({
 
 }).extend('Gallery');
 
-// let's just make everything, but only on DOM elements we find inside .container
+// let's just make everything, but only on DOM elements 
+// we find inside .container
 $.feach().makeAll($('.container'));
 
 // we need to act all these DOM elements
